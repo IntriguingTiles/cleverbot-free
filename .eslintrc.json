@@ -1,0 +1,33 @@
+{
+    "env": {
+        "es6": true,
+        "node": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "ecmaVersion": 2017
+    },
+    "rules": {
+        "brace-style": "error",
+        "linebreak-style": [
+            "error",
+            "windows"
+        ],
+        "no-var": "error",
+        "prefer-const": "error",
+        "no-console": "off",
+        "quotes": [
+            "error",
+            "double"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
+        "yoda": "error",
+        "eqeqeq": [
+            "error",
+            "smart"
+        ]
+    }
+}

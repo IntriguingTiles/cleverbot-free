@@ -1,0 +1,29 @@
+{
+  "name": "cleverbot-free",
+  "version": "1.0.0",
+  "description": "Simple package to interact with the same API that the Cleverbot website uses for free.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IntriguingTiles/cleverbot-free.git"
+  },
+  "keywords": [
+    "cleverbot"
+  ],
+  "author": "IntriguingTiles",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/IntriguingTiles/cleverbot-free/issues"
+  },
+  "homepage": "https://github.com/IntriguingTiles/cleverbot-free#readme",
+  "dependencies": {
+    "md5": "^2.2.1",
+    "superagent": "^5.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.5.1"
+  }
+}
