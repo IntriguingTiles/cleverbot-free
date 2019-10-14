@@ -7,7 +7,7 @@ let cookies;
  * Sends a mesasage to Cleverbot
  * @param {string} stimulus The message to be sent
  * @param {string[]} [context] An array of previous messages and responses
- * @returns {string} The response
+ * @returns {Promise<string>} The response
  */
 module.exports = async (stimulus, context = []) => {
     if (cookies == null) {
