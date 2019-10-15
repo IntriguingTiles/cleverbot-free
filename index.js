@@ -16,13 +16,14 @@ module.exports = async (stimulus, context = []) => {
         cookies = req.header["set-cookie"]; // eslint-disable-line require-atomic-updates
     }
 
-    let payload = `stimulus=${stimulus}&`;
+    let payload = `stimulus=${escape(escape(stimulus).replace(/%u/g, "|"))}&`;
 
     // we're going to assume that the first item in the array is the first message sent
     const reverseContext = context.reverse();
 
     for (let i = 0; i < context.length; i++) {
-        payload += `vText${i + 2}=${reverseContext[i]}&`;
+        // we're going to assume that the context hasn't been escaped
+        payload += `vText${i + 2}=${escape(escape(reverseContext[i]).replace(/%u/g, "|"))}&`;
     }
 
     payload += "cb_settings_scripting=no&islearning=1&icognoid=wsf&icognocheck=";
