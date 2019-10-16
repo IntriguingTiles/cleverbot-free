@@ -16,14 +16,15 @@ module.exports = async (stimulus, context = []) => {
         cookies = req.header["set-cookie"]; // eslint-disable-line require-atomic-updates
     }
 
-    let payload = `stimulus=${escape(escape(stimulus).replace(/%u/g, "|"))}&`;
+    // why, cleverbot, why do you do need me to do this
+    let payload = `stimulus=${escape(stimulus).includes("%u") ? escape(escape(stimulus).replace(/%u/g, "|")) : escape(stimulus)}&`;
 
     // we're going to assume that the first item in the array is the first message sent
     const reverseContext = context.reverse();
 
     for (let i = 0; i < context.length; i++) {
         // we're going to assume that the context hasn't been escaped
-        payload += `vText${i + 2}=${escape(escape(reverseContext[i]).replace(/%u/g, "|"))}&`;
+        payload += `vText${i + 2}=${escape(reverseContext[i]).includes("%u") ? escape(escape(reverseContext[i]).replace(/%u/g, "|")) : escape(reverseContext[i])}&`;
     }
 
     payload += "cb_settings_scripting=no&islearning=1&icognoid=wsf&icognocheck=";
