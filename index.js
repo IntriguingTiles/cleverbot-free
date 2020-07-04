@@ -10,6 +10,8 @@ let cookies;
  * @returns {Promise<string>} The response
  */
 module.exports = async (stimulus, context = []) => {
+    const _context = context.slice(); // clone array to prevent subsequent calls from modifying it
+    
     if (cookies == null) {
         // we must get the XVIS cookie before we can make requests to the API
         const req = await superagent.get("https://www.cleverbot.com/");
@@ -20,9 +22,9 @@ module.exports = async (stimulus, context = []) => {
     let payload = `stimulus=${escape(stimulus).includes("%u") ? escape(escape(stimulus).replace(/%u/g, "|")) : escape(stimulus)}&`;
 
     // we're going to assume that the first item in the array is the first message sent
-    const reverseContext = context.reverse();
+    const reverseContext = _context.reverse();
 
-    for (let i = 0; i < context.length; i++) {
+    for (let i = 0; i < _context.length; i++) {
         // we're going to assume that the context hasn't been escaped
         payload += `vText${i + 2}=${escape(reverseContext[i]).includes("%u") ? escape(escape(reverseContext[i]).replace(/%u/g, "|")) : escape(reverseContext[i])}&`;
     }
