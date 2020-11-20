@@ -25,5 +25,6 @@
   },
   "devDependencies": {
     "eslint": "^6.5.1"
-  }
+  },
+  "typings": "index.d.ts"
 }

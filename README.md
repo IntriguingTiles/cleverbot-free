@@ -14,3 +14,5 @@ cleverbot("Hello.").then(response => /*...*/);
 // Please note that context should include messages sent to Cleverbot as well as the responses
 cleverbot("Bad.", ["Hi.", "How are you?"]).then(response => /*...*/);
 ```
+
+**Typings included**
