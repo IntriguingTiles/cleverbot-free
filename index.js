@@ -35,6 +35,10 @@ module.exports = async (stimulus, context = [], language) => {
     payload += md5(payload.substring(7, 33));
 
     const req = await superagent.post("https://www.cleverbot.com/webservicemin?uc=UseOfficialCleverbotAPI")
+        .timeout({
+            response: 5000,
+            deadline: 60000,
+        })
         .set("Cookie", cookies)
         .set("User-Agent", "Mozilla/5.0")
         .type("text/plain")
