@@ -6,15 +6,16 @@ let cookies;
 /**
  * Sends a mesasage to Cleverbot
  * @param {string} stimulus The message to be sent
- * @param {string[]} [context] An array of previous messages and responses
+ * @param {string[]?} context An array of previous messages and responses
+ * @param {string?} language The language of the message (null for auto detect)
  * @returns {Promise<string>} The response
  */
-module.exports = async (stimulus, context = []) => {
+module.exports = async (stimulus, context = [], language) => {
     const _context = context.slice(); // clone array to prevent subsequent calls from modifying it
-    
+
     if (cookies == null) {
         // we must get the XVIS cookie before we can make requests to the API
-        const req = await superagent.get("https://www.cleverbot.com/");
+        const req = await superagent.get("https://www.cleverbot.com/").set("User-Agent", "Mozilla/5.0");
         cookies = req.header["set-cookie"]; // eslint-disable-line require-atomic-updates
     }
 
@@ -29,18 +30,19 @@ module.exports = async (stimulus, context = []) => {
         payload += `vText${i + 2}=${escape(reverseContext[i]).includes("%u") ? escape(escape(reverseContext[i]).replace(/%u/g, "|")) : escape(reverseContext[i])}&`;
     }
 
-    payload += "cb_settings_scripting=no&islearning=1&icognoid=wsf&icognocheck=";
+    payload += `${language ? `cb_settings_language=${language}&` : ""}cb_settings_scripting=no&islearning=1&icognoid=wsf&icognocheck=`;
 
     payload += md5(payload.substring(7, 33));
 
     const req = await superagent.post("https://www.cleverbot.com/webservicemin?uc=UseOfficialCleverbotAPI")
-    .timeout({
-        response: 5000,
-        deadline: 60000,
-    })
-    .set("Cookie", cookies)
-    .type("text/plain")
-    .send(payload);
+        .timeout({
+            response: 5000,
+            deadline: 60000,
+        })
+        .set("Cookie", cookies)
+        .set("User-Agent", "Mozilla/5.0")
+        .type("text/plain")
+        .send(payload);
 
     return decodeURIComponent(req.header["cboutput"]);
 };
