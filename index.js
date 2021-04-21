@@ -44,5 +44,5 @@ module.exports = async (stimulus, context = [], language) => {
         .type("text/plain")
         .send(payload);
 
-    return decodeURIComponent(req.header["cboutput"]);
+    return decodeURIComponent(req.text.split("\r")[0]);
 };
