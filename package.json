@@ -4,7 +4,7 @@
   "description": "Simple package to interact with the same API that the Cleverbot website uses for free.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test.js"
   },
   "repository": {
     "type": "git",
