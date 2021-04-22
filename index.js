@@ -15,7 +15,7 @@ module.exports = async (stimulus, context = [], language) => {
 
     if (cookies == null) {
         // we must get the XVIS cookie before we can make requests to the API
-        const req = await superagent.get("https://www.cleverbot.com/").set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.72 Safari/537.36");
+        const req = await superagent.get("https://www.cleverbot.com/").set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.85 Safari/537.36");
         cookies = req.header["set-cookie"]; // eslint-disable-line require-atomic-updates
     }
 
@@ -40,7 +40,7 @@ module.exports = async (stimulus, context = [], language) => {
             deadline: 60000,
         })
         .set("Cookie", cookies)
-        .set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.72 Safari/537.36")
+        .set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.85 Safari/537.36")
         .type("text/plain")
         .send(payload);
 
