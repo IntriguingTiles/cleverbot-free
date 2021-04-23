@@ -2,6 +2,7 @@ const superagent = require("superagent");
 const md5 = require("md5");
 
 let cookies;
+let cbsid;
 
 /**
  * Sends a mesasage to Cleverbot
@@ -34,15 +35,16 @@ module.exports = async (stimulus, context = [], language) => {
 
     payload += md5(payload.substring(7, 33));
 
-    const req = await superagent.post("https://www.cleverbot.com/webservicemin?uc=UseOfficialCleverbotAPI")
+    const req = await superagent.post(`https://www.cleverbot.com/webservicemin?uc=UseOfficialCleverbotAPI${cbsid ? `&out=&in=&bot=c&cbsid=${cbsid}&xai=${cbsid.substring(0, 3)}&ns=1&al=&dl=&flag=&user=&mode=1&alt=0&reac=&emo=&sou=website&xed=&` : ""}`)
         .timeout({
             response: 5000,
             deadline: 60000,
         })
-        .set("Cookie", cookies)
+        .set("Cookie", `${cookies[0].split(";")[0]}; _cbsid=-1`)
         .set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.85 Safari/537.36")
         .type("text/plain")
         .send(payload);
 
+    cbsid = req.text.split("\r")[1];
     return decodeURIComponent(req.text.split("\r")[0]);
 };
