@@ -35,16 +35,29 @@ module.exports = async (stimulus, context = [], language) => {
 
     payload += md5(payload.substring(7, 33));
 
-    const req = await superagent.post(`https://www.cleverbot.com/webservicemin?uc=UseOfficialCleverbotAPI${cbsid ? `&out=&in=&bot=c&cbsid=${cbsid}&xai=${cbsid.substring(0, 3)}&ns=1&al=&dl=&flag=&user=&mode=1&alt=0&reac=&emo=&sou=website&xed=&` : ""}`)
-        .timeout({
-            response: 5000,
-            deadline: 60000,
-        })
-        .set("Cookie", `${cookies[0].split(";")[0]}; _cbsid=-1`)
-        .set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.85 Safari/537.36")
-        .type("text/plain")
-        .send(payload);
+    for (let i = 0; i < 15; i++) {
+        try {
+            const req = await superagent.post(`https://www.cleverbot.com/webservicemin?uc=UseOfficialCleverbotAPI${cbsid ? `&out=&in=&bot=c&cbsid=${cbsid}&xai=${cbsid.substring(0, 3)}&ns=1&al=&dl=&flag=&user=&mode=1&alt=0&reac=&emo=&sou=website&xed=&` : ""}`)
+                .timeout({
+                    response: 10000,
+                    deadline: 60000,
+                })
+                .set("Cookie", `${cookies[0].split(";")[0]}; _cbsid=-1`)
+                .set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.85 Safari/537.36")
+                .type("text/plain")
+                .send(payload);
 
-    cbsid = req.text.split("\r")[1];
-    return decodeURIComponent(req.text.split("\r")[0]);
+            cbsid = req.text.split("\r")[1];
+            return decodeURIComponent(req.text.split("\r")[0]);
+        } catch (err) {
+            if (err.status === 503) {
+                // retry after a bit
+                await new Promise(resolve => setTimeout(resolve, 1000));
+            } else {
+                throw err;
+            }
+        }
+    }
+
+    throw "Failed to get a response after 15 tries";
 };
