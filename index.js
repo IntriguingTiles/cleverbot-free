@@ -5,6 +5,7 @@ let cookies;
 let cbsid;
 let xai;
 let lastResponse;
+let lastCookieUpdate = 0;
 
 /**
  * Sends a mesasage to Cleverbot
@@ -16,10 +17,11 @@ let lastResponse;
 module.exports = async (stimulus, context = [], language) => {
     const _context = context.slice(); // clone array to prevent subsequent calls from modifying it
 
-    if (cookies == null) {
+    if (cookies == null || Date.now() - lastCookieUpdate >= 86400000) {
         // we must get the XVIS cookie before we can make requests to the API
-        const req = await superagent.get("https://www.cleverbot.com/").set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.85 Safari/537.36");
+        const req = await superagent.get("https://www.cleverbot.com/").set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36");
         cookies = req.header["set-cookie"]; // eslint-disable-line require-atomic-updates
+        lastCookieUpdate = Date.now();
     }
 
     // why, cleverbot, why do you do need me to do this
