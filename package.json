@@ -1,6 +1,6 @@
 {
   "name": "cleverbot-free",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "description": "Simple package to interact with the same API that the Cleverbot website uses for free.",
   "main": "index.js",
   "scripts": {
