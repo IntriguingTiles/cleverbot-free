@@ -1,6 +1,8 @@
 const superagent = require("superagent");
 const md5 = require("md5");
 
+const userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36";
+
 let cookies;
 let cbsid;
 let xai;
@@ -19,7 +21,8 @@ module.exports = async (stimulus, context = [], language) => {
 
     if (cookies == null || Date.now() - lastCookieUpdate >= 86400000) {
         // we must get the XVIS cookie before we can make requests to the API
-        const req = await superagent.get("https://www.cleverbot.com/").set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36");
+        const date = new Date();
+        const req = await superagent.get(`https://www.cleverbot.com/extras/conversation-social-min.js?${date.getFullYear()}${date.getMonth().toString().padStart(2, "0")}${date.getDate().toString().padStart(2, "0")}`).set("User-Agent", userAgent);
         cookies = req.header["set-cookie"]; // eslint-disable-line require-atomic-updates
         lastCookieUpdate = Date.now();
     }
@@ -47,7 +50,7 @@ module.exports = async (stimulus, context = [], language) => {
                     deadline: 60000,
                 })
                 .set("Cookie", `${cookies[0].split(";")[0]}; _cbsid=-1`)
-                .set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36")
+                .set("User-Agent", userAgent)
                 .type("text/plain")
                 .send(payload);
 
