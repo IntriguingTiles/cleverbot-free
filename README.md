@@ -1,4 +1,6 @@
 # cleverbot-free
+![API Status](https://github.com/IntriguingTiles/cleverbot-free/actions/workflows/api.yml/badge.svg)
+
 Simple unofficial package to interact with the same API that the Cleverbot website uses for free.
 
 ## **Please use the official Cleverbot API as the Cleverbot developers can easily break this package at any time.**

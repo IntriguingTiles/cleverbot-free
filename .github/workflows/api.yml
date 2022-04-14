@@ -1,0 +1,29 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: API Status
+
+on:
+  push:
+  schedule:
+    - cron: "0 * * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js 16.x
+      uses: actions/setup-node@v2
+      with:
+        node-version: 16.x
+    - run: npm install
+    - run: npm test
+    - name: Failure
+      if: ${{ failure() }}
+      run: |
+        curl --request POST \
+        --url ${{ secrets.WEBHOOK_URL }} \
+        --header 'content-type: application/json' \
+        --data '{"username": "Cleverbot API Status", "avatar_url": "https://cdn.discordapp.com/attachments/407012752633364481/964301954287280218/funny_tiger.png", "content": "<@221017760111656961> api failure"}'
