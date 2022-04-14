@@ -44,7 +44,7 @@ module.exports = async (stimulus, context = [], language) => {
 
     for (let i = 0; i < 15; i++) {
         try {
-            const req = await superagent.post(`https://www.cleverbot.com/webservicemin?uc=UseOfficialCleverbotAPI${cbsid ? `&out=${encodeURIComponent(lastResponse)}&in=${encodeURIComponent(stimulus)}&bot=c&cbsid=${cbsid}&xai=${xai}&ns=2&al=&dl=en&flag=&user=&mode=1&alt=0&reac=&emo=&sou=website&xed=&` : ""}`)
+            const req = await superagent.post(`https://www.cleverbot.com/webservicemin?uc=UseOfficialCleverbotAPI${cbsid ? `&out=${encodeURIComponent(lastResponse)}&in=${encodeURIComponent(stimulus)}&bot=c&cbsid=${cbsid}&xai=${xai}&ns=2&al=&dl=&flag=&user=&mode=1&alt=0&reac=&emo=&sou=website&xed=&` : ""}`)
                 .timeout({
                     response: 10000,
                     deadline: 60000,
