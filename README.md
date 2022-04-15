@@ -1,5 +1,5 @@
 # cleverbot-free
-![API Status](https://github.com/IntriguingTiles/cleverbot-free/actions/workflows/api.yml/badge.svg)
+[![API Status](https://github.com/IntriguingTiles/cleverbot-free/workflows/API%20Status/badge.svg)](https://github.com/IntriguingTiles/cleverbot-free/actions/workflows/api.yml)
 
 Simple unofficial package to interact with the same API that the Cleverbot website uses for free.
 
