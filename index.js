@@ -1,7 +1,7 @@
 const superagent = require("superagent");
 const md5 = require("md5");
 
-const userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36";
+const userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36";
 
 let cookies;
 let cbsid;
@@ -10,7 +10,7 @@ let lastResponse;
 let lastCookieUpdate = 0;
 
 /**
- * Sends a mesasage to Cleverbot
+ * Sends a message to Cleverbot
  * @param {string} stimulus The message to be sent
  * @param {string[]?} context An array of previous messages and responses
  * @param {string?} language The language of the message (null for auto detect)

@@ -13,8 +13,7 @@ rl.on("line", async line => {
         context.push(response);
         console.log(response);
     } catch (err) {
-        console.log(err);
-        console.log("Failed to get a response!");
+        console.error("Failed to get a response.", err);
     }
     rl.prompt();
 });
