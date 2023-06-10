@@ -68,5 +68,5 @@ module.exports = async (stimulus, context = [], language) => {
         }
     }
 
-    throw "Failed to get a response after 15 tries";
+    throw new Error("Failed to get a response after 15 tries.");
 };
