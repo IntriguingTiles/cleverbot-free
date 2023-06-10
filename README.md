@@ -5,6 +5,8 @@ Simple unofficial package to interact with the same API that the Cleverbot websi
 
 ## **Please use the official Cleverbot API as the Cleverbot developers can easily break this package at any time.**
 
+### You risk having your IP address **permanently banned** from cleverbot.com if you use this package!
+
 # Usage
 ```js
 const cleverbot = require("cleverbot-free");
