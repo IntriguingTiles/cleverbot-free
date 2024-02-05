@@ -20,10 +20,3 @@ jobs:
         node-version: 16.x
     - run: npm install
     - run: npm test
-    - name: Failure
-      if: ${{ failure() }}
-      run: |
-        curl --request POST \
-        --url ${{ secrets.WEBHOOK_URL }} \
-        --header 'content-type: application/json' \
-        --data '{"username": "Cleverbot API Status", "avatar_url": "https://cdn.discordapp.com/attachments/407012752633364481/964301954287280218/funny_tiger.png", "content": "<@221017760111656961> api failure"}'
