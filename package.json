@@ -21,7 +21,7 @@
   "homepage": "https://github.com/IntriguingTiles/cleverbot-free#readme",
   "dependencies": {
     "md5": "^2.3.0",
-    "superagent": "^8.0.9"
+    "superagent": "^9.0.1"
   },
   "devDependencies": {
     "eslint": "^8.16.0"
